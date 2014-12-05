@@ -6,4 +6,6 @@ class Product < ActiveRecord::Base
 		:with => %r{\.(gif|jpg|png)\z}i,
 		:message => 'must be a URL for GIF, JPG or PNG image.'
 	}
+
+  default_scope {order('title ASC')}
 end
