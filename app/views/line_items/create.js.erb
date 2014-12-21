@@ -1,0 +1,10 @@
+$("#cart").html("<%= escape_javascript(render(@cart)) %>");
+
+<% if @cart.total_items == 1 %>
+  $("#cart").css({ display: "block" })
+  $("#cart").css({ opacity: 0 })
+  $("#cart").animate({ opacity: 1 }) 
+<% end %>
+
+$("#new_line_item").css({ opacity: 0 })
+$("#new_line_item").animate({ opacity: 1 })  
