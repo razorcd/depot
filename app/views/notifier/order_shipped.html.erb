@@ -1,0 +1,16 @@
+<h1>Notifier#order_shipped</h1>
+
+<p>
+	Dear <%= @order.name %> <br/>
+
+	Thank you for your recent order from The Pragmatic Store. <br/>
+</p>
+ <br/>
+<div>
+	You ordered the following items: <br/>
+	<%= render @order.line_items %>
+</div>
+ <br/> <br/>
+<p>
+	Order shipped!
+</p>
