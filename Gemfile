@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: :development
+gem 'mysql', group: :production
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -33,6 +34,7 @@ gem 'colorize'
 # Use unicorn as the app server
 # gem 'unicorn'
 
+gem 'capistrano'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
