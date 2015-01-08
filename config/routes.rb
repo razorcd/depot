@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     root :to => 'store#index', :as => 'store'  #creates store_path
   end
 
+  get 'auth/:provider/callback' => 'session#create_with_oauth'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

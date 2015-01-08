@@ -1,13 +1,16 @@
 require 'digest/sha2'
 
 class User < ActiveRecord::Base
+	# include ActiveModel::MassAssignmentSecurity
 	after_destroy :ensure_an_admin_remains
 	validates :name, :presence => true, :uniqueness => true
-	validates :password, :confirmation => true
+	validates :password, :confirmation => true #or :uid
 	attr_accessor :password_confirmation
 	attr_reader :password
+	# attr_protected :uid, :provider, :name # see text for explanation
 
-	validate :password_must_be_present
+	validate :password_must_be_present unless :provider
+	validate :auth_must_be_present unless :password
 
 	def password=(password)
 		@password = password
@@ -31,7 +34,20 @@ class User < ActiveRecord::Base
 	end
 
 
-	private
+	def self.create_with_omniauth(auth)
+		User.create!(
+		:provider => auth["provider"],
+	  :uid => auth["uid"],
+	  :name => auth["info"]["name"])
+	end
+
+private
+
+	def auth_must_be_present
+		errors.add(:provider, "Missing provider") unless provider.present?
+		errors.add(:uid, "Missing uid") unless uid.present?
+		errors.add(:name, "Missing name") unless name.present?
+	end
 
 	def password_must_be_present
 		errors.add(:password, "Missing password") unless hashed_password.present?
