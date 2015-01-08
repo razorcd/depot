@@ -10,6 +10,7 @@
 <body id="store">
   <div id="banner">
 
+
     <!-- language selector -->
     <%= form_tag store_path, :method => :get, :class => 'locale' do %>
       <%= select_tag 'set_locale',
@@ -20,6 +21,14 @@
     <% end %>
 
     <%= image_tag("logo.png") %>
+    
+    <!-- loggin/logout/register buttons -->
+    <div class= "login_logout">
+      <%= link_to "Register", new_user_path if !session[:user_id]%>
+      <%= link_to "Login", "login" if !session[:user_id]%>
+      <%= link_to "Logout", "logout", :method => :delete if session[:user_id]%>
+    </div>
+
     <%= @page_title || t('.title') %>
   </div>
 
